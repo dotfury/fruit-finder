@@ -1,4 +1,6 @@
-import './style.css';
+import '@/styles/normalize.css';
+import '@/styles/style.css';
+
 import Store from '@/services/store';
 
 // find out more URL: https://www.google.com/search?q={fruit}

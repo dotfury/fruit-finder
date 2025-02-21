@@ -14,6 +14,7 @@ interface Fruit {
 interface Store {
   featuredFruit: Fruit | null;
   featuredFruitIndex: number;
+  suggestedFruitIndexes: number[];
   allFruit: Fruit[];
   fruitCount: number;
   suggestedFruit: Fruit[];
@@ -26,6 +27,7 @@ interface Store {
 const Store: Store = {
   featuredFruit: null,
   featuredFruitIndex: Infinity,
+  suggestedFruitIndexes: [],
   allFruit: [],
   fruitCount: Infinity,
   suggestedFruit: [],
@@ -48,12 +50,18 @@ const Store: Store = {
     Store.suggestedFruit = result.map(() => Store.getRandomFruit());
   },
   getRandomFruit: (): Fruit => {
-    // TODO: dont repeat suggested fruit
     const index = Math.round(Math.random() * (Store.fruitCount - 1));
 
-    return index !== Store.featuredFruitIndex
-      ? Store.allFruit[index]
-      : Store.getRandomFruit();
+    if (
+      Store.suggestedFruitIndexes.includes(index) ||
+      index == Store.featuredFruitIndex
+    ) {
+      return Store.getRandomFruit();
+    }
+
+    Store.suggestedFruitIndexes.push(index);
+
+    return Store.allFruit[index];
   },
 };
 
