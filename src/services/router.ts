@@ -17,6 +17,11 @@ const Router: Router = {
   },
   navigate: (to: string, addToHistory: boolean = true) => {
     if (!Router.main) return;
+
+    if (addToHistory) {
+      history.pushState({ to }, '', to);
+    }
+
     Router.main.appendChild(document.createElement('featured-fruit'));
     window.scrollX = 0;
     window.scrollY = 0;

@@ -18,10 +18,6 @@ interface Store {
   allFruit: Fruit[];
   fruitCount: number;
   suggestedFruit: Fruit[];
-  init: () => void;
-  setFeaturedFruit: () => void;
-  setSuggestedFruit: () => void;
-  getRandomFruit: () => Fruit;
 }
 
 const Store: Store = {
@@ -31,38 +27,55 @@ const Store: Store = {
   allFruit: [],
   fruitCount: Infinity,
   suggestedFruit: [],
-  init: async () => {
-    const fruits = await API.fetchFruit();
-    Store.allFruit = fruits;
-    Store.fruitCount = Store.allFruit.length;
-    Store.setFeaturedFruit();
-    Store.setSuggestedFruit();
-  },
-  setFeaturedFruit: () => {
-    Store.featuredFruitIndex = Math.round(
-      Math.random() * (Store.fruitCount - 1)
-    );
-    Store.featuredFruit = Store.allFruit[Store.featuredFruitIndex];
-  },
-  setSuggestedFruit: () => {
-    const result: Fruit[] = new Array(5).fill(1);
-
-    Store.suggestedFruit = result.map(() => Store.getRandomFruit());
-  },
-  getRandomFruit: (): Fruit => {
-    const index = Math.round(Math.random() * (Store.fruitCount - 1));
-
-    if (
-      Store.suggestedFruitIndexes.includes(index) ||
-      index == Store.featuredFruitIndex
-    ) {
-      return Store.getRandomFruit();
-    }
-
-    Store.suggestedFruitIndexes.push(index);
-
-    return Store.allFruit[index];
-  },
 };
 
-export default Store;
+// proxy typing issue: https://norday.tech/posts/2023/typescript-proxy-objects/
+const pStore = new Proxy(Store, {
+  set(target, property, value) {
+    target[property] = value;
+
+    if (property == 'featuredFruit') {
+      window.dispatchEvent(new Event('featuredfruitchange'));
+    }
+
+    return true;
+  },
+});
+
+export default pStore;
+
+export async function initStore(): Promise<void> {
+  const fruits = await API.fetchFruit();
+  pStore.allFruit = fruits;
+  pStore.fruitCount = pStore.allFruit.length;
+  setFeaturedFruit();
+  setSuggestedFruit();
+}
+
+function setFeaturedFruit(): void {
+  pStore.featuredFruitIndex = Math.round(
+    Math.random() * (pStore.fruitCount - 1)
+  );
+  pStore.featuredFruit = pStore.allFruit[pStore.featuredFruitIndex];
+}
+
+function setSuggestedFruit(): void {
+  const result: Fruit[] = new Array(5).fill(1);
+
+  pStore.suggestedFruit = result.map(() => getRandomFruit());
+}
+
+function getRandomFruit(): Fruit {
+  const index = Math.round(Math.random() * (pStore.fruitCount - 1));
+
+  if (
+    pStore.suggestedFruitIndexes.includes(index) ||
+    index == pStore.featuredFruitIndex
+  ) {
+    return getRandomFruit();
+  }
+
+  pStore.suggestedFruitIndexes.push(index);
+
+  return pStore.allFruit[index];
+}
