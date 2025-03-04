@@ -29,9 +29,9 @@ const Store: Store = {
   suggestedFruit: [],
 };
 
-// proxy typing issue: https://norday.tech/posts/2023/typescript-proxy-objects/
+// proxy typing: https://norday.tech/posts/2023/typescript-proxy-objects/
 const pStore = new Proxy(Store, {
-  set(target, property, value) {
+  set(target: Store, property: keyof Store, value: any) {
     target[property] = value;
 
     if (property == 'featuredFruit') {

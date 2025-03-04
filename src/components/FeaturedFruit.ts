@@ -19,7 +19,8 @@ export default class FeaturedFruit extends HTMLElement {
   }
 
   render() {
-    console.log(Store.featuredFruit);
-    this.querySelector('p')!.textContent = Store.featuredFruit.name;
+    this.querySelector('h3')!.textContent = Store.featuredFruit.name;
+    this.querySelector('p')!.textContent =
+      `${Store.featuredFruit.nutritions.calories}cal`;
   }
 }

@@ -1,7 +1,7 @@
 import '@/styles/normalize.css';
 import '@/styles/style.css';
 
-import Store, { initStore } from '@/services/store';
+import { initStore } from '@/services/store';
 import Router from '@/services/router';
 import FeaturedFruit from '@/components/FeaturedFruit';
 import FruitDetail from '@/components/FruitDetail';
@@ -14,5 +14,4 @@ customElements.define('fruit-detail', FruitDetail);
 window.addEventListener('DOMContentLoaded', async () => {
   initStore();
   Router.init();
-  console.log(Store);
 });
