@@ -12,6 +12,6 @@ customElements.define('fruit-detail', FruitDetail);
 // find out more URL: https://www.google.com/search?q={fruit}
 
 window.addEventListener('DOMContentLoaded', async () => {
-  initStore();
+  await initStore();
   Router.init();
 });

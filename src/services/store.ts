@@ -79,3 +79,9 @@ function getRandomFruit(): Fruit {
 
   return pStore.allFruit[index];
 }
+
+export function getFruit(name: string): Fruit | undefined {
+  return pStore.allFruit.find(
+    (f) => f.name.toLocaleLowerCase() === name.toLocaleLowerCase()
+  );
+}

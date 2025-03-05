@@ -33,9 +33,8 @@ const Router: Router = {
       default:
         if (to.startsWith(`${BASE_URL}/detail-`)) {
           Router.pageElement = document.createElement('fruit-detail');
-          const paramId = to.substring(to.lastIndexOf('-') + 1);
-
-          console.log('ID: ', paramId);
+          const fruit = to.substring(to.lastIndexOf('-') + 1);
+          Router.pageElement.dataset.fruitId = fruit;
         } else {
           alert('error');
         }
