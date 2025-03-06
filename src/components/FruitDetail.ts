@@ -17,8 +17,10 @@ export default class FruitDetail extends HTMLElement {
 
   render() {
     const fruit = getFruit(this.dataset.fruitId);
+    console.log(fruit);
     const head = this.querySelector('h3')!;
     const text = this.querySelector('p')!;
+    const link = this.querySelector('a')!;
 
     if (!fruit) {
       head.textContent = 'Not Found';
@@ -26,6 +28,11 @@ export default class FruitDetail extends HTMLElement {
     } else {
       head.textContent = fruit.name;
       text.textContent = `${fruit.nutritions.calories}cal`;
+      link.textContent = `Find out more about ${fruit.name}`;
+      link.setAttribute(
+        'href',
+        `https://www.google.com/search?q=${fruit.name}`
+      );
     }
   }
 }

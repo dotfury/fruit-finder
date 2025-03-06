@@ -1,3 +1,4 @@
+import { BASE_URL } from '@/utils/constants';
 interface Router {
   main: HTMLElement | null;
   pageElement: HTMLElement | null;
@@ -24,8 +25,6 @@ const Router: Router = {
       history.pushState({ to }, '', to);
     }
 
-    const BASE_URL = '/fruit-finder';
-
     switch (to) {
       case BASE_URL:
         Router.pageElement = document.createElement('featured-fruit');
@@ -34,6 +33,7 @@ const Router: Router = {
         if (to.startsWith(`${BASE_URL}/detail-`)) {
           Router.pageElement = document.createElement('fruit-detail');
           const fruit = to.substring(to.lastIndexOf('-') + 1);
+          console.log('f: ', fruit);
           Router.pageElement.dataset.fruitId = fruit;
         } else {
           alert('error');
