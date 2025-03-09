@@ -13,7 +13,7 @@ const Router: Router = {
     Router.main = document.querySelector('main');
 
     window.addEventListener('popstate', (event) => {
-      Router.navigate(event.state.route, false);
+      Router.navigate(event.state.to, false);
     });
 
     Router.navigate(window.location.pathname);
@@ -33,7 +33,6 @@ const Router: Router = {
         if (to.startsWith(`${BASE_URL}/detail-`)) {
           Router.pageElement = document.createElement('fruit-detail');
           const fruit = to.substring(to.lastIndexOf('-') + 1);
-          console.log('f: ', fruit);
           Router.pageElement.dataset.fruitId = fruit;
         } else {
           alert('error');

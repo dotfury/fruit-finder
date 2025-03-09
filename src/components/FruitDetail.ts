@@ -17,7 +17,6 @@ export default class FruitDetail extends HTMLElement {
 
   render() {
     const fruit = getFruit(this.dataset.fruitId);
-    console.log(fruit);
     const head = this.querySelector('h3')!;
     const text = this.querySelector('p')!;
     const link = this.querySelector('a')!;
