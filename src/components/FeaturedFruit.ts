@@ -46,6 +46,9 @@ export default class FeaturedFruit extends HTMLElement {
     this.header.textContent = this.freaturedFruit;
     this.text.textContent = `${Store.featuredFruit.nutritions.calories}cal`;
 
+    const suggestions = document.createElement('recommended-fruits');
+    this.appendChild(suggestions);
+
     this.container.addEventListener('click', () => this.goToDetails());
   }
 
