@@ -23,7 +23,7 @@ export default class RecomendedFruit extends HTMLElement {
     const content = template.content.cloneNode(true);
 
     this.root.appendChild(content);
-    this.fruit = this.dataset.fruitName;
+    this.fruit = this.dataset.fruitName ?? '';
 
     this.render();
   }

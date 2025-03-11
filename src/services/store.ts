@@ -1,6 +1,6 @@
 import API from '@/services/api';
 
-interface Fruit {
+export interface Fruit {
   family: string;
   genus: string;
   id: number;
@@ -36,6 +36,10 @@ const pStore = new Proxy(Store, {
 
     if (property == 'featuredFruit') {
       window.dispatchEvent(new Event('featuredfruitchange'));
+    }
+
+    if (property == 'suggestedFruit') {
+      window.dispatchEvent(new Event('suggestedfruitchange'));
     }
 
     return true;
