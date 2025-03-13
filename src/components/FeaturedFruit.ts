@@ -6,6 +6,7 @@ export default class FeaturedFruit extends HTMLElement {
   header: HTMLElement | null;
   text: HTMLElement | null;
   container: HTMLElement | null;
+  button: HTMLButtonElement | null;
   freaturedFruit: string;
 
   constructor() {
@@ -14,6 +15,7 @@ export default class FeaturedFruit extends HTMLElement {
     this.header = null;
     this.text = null;
     this.container = null;
+    this.button = null;
     this.freaturedFruit = '';
   }
 
@@ -32,16 +34,17 @@ export default class FeaturedFruit extends HTMLElement {
   }
 
   disconnectedCallback() {
-    this.container?.removeEventListener('click', () => this.goToDetails());
+    this.button?.removeEventListener('click', () => this.goToDetails());
   }
 
   render(): void {
     if (!Store.featuredFruit) return;
 
     this.freaturedFruit = Store.featuredFruit.name;
-    this.header = this.querySelector('h3')!;
-    this.text = this.querySelector('p')!;
     this.container = this.querySelector('div')!;
+    this.header = this.container.querySelector('h3')!;
+    this.text = this.container.querySelector('p')!;
+    this.button = this.container.querySelector('button')!;
 
     this.header.textContent = this.freaturedFruit;
     this.text.textContent = `${Store.featuredFruit.nutritions.calories}cal`;
@@ -49,7 +52,7 @@ export default class FeaturedFruit extends HTMLElement {
     const suggestions = document.createElement('recommended-fruits');
     this.appendChild(suggestions);
 
-    this.container.addEventListener('click', () => this.goToDetails());
+    this.button.addEventListener('click', () => this.goToDetails());
   }
 
   goToDetails(): void {

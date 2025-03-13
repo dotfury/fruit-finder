@@ -2,7 +2,6 @@ import Router from '@/services/router';
 import { BASE_URL } from '@/utils/constants';
 
 export default class RecomendedFruit extends HTMLElement {
-  root: ShadowRoot;
   header: HTMLElement | null;
   button: HTMLButtonElement | null;
   fruit: string;
@@ -10,7 +9,6 @@ export default class RecomendedFruit extends HTMLElement {
   constructor() {
     super();
 
-    this.root = this.attachShadow({ mode: 'open' });
     this.header = null;
     this.button = null;
     this.fruit = '';
@@ -22,7 +20,7 @@ export default class RecomendedFruit extends HTMLElement {
     ) as HTMLTemplateElement)!;
     const content = template.content.cloneNode(true);
 
-    this.root.appendChild(content);
+    this.appendChild(content);
     this.fruit = this.dataset.fruitName ?? '';
 
     this.render();
@@ -33,8 +31,8 @@ export default class RecomendedFruit extends HTMLElement {
   }
 
   render(): void {
-    this.header = this.root.querySelector('h4')!;
-    this.button = this.root.querySelector('button')!;
+    this.header = this.querySelector('h4')!;
+    this.button = this.querySelector('button')!;
 
     this.header.textContent = this.fruit;
 
