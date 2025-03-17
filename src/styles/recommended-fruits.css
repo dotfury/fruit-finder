@@ -1,3 +1,18 @@
-button {
-  color: red;
+ul {
+  padding: 0;
+}
+
+ul li {
+  float: left;
+  list-style: none;
+  width: 170px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-right: 5px;
+}
+
+h4 {
+  margin: 0;
 }
