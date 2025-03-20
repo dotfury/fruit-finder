@@ -1,4 +1,4 @@
-import { getFruit } from '@/services/store';
+import Store, { getFruit } from '@/services/store';
 
 export default class FruitDetail extends HTMLElement {
   constructor() {
@@ -12,6 +12,9 @@ export default class FruitDetail extends HTMLElement {
     const content = template.content.cloneNode(true);
 
     this.appendChild(content);
+    window.addEventListener('allfruitchange', () => {
+      this.render();
+    });
     this.render();
   }
 
@@ -23,8 +26,10 @@ export default class FruitDetail extends HTMLElement {
     const link = this.querySelector('a')!;
 
     if (!fruit) {
-      head.textContent = 'Not Found';
-      nutrition.textContent = `No data on ${this.dataset.fruitId} was found.`;
+      if (Store.allFruit.length > 0) {
+        head.textContent = 'Not Found';
+        nutrition.textContent = `No data on ${this.dataset.fruitId} was found.`;
+      }
     } else {
       head.textContent = fruit.name;
       family.textContent = `

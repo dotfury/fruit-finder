@@ -34,13 +34,7 @@ const pStore = new Proxy(Store, {
   set(target: Store, property: keyof Store, value: any) {
     target[property] = value;
 
-    if (property == 'featuredFruit') {
-      window.dispatchEvent(new Event('featuredfruitchange'));
-    }
-
-    if (property == 'suggestedFruit') {
-      window.dispatchEvent(new Event('suggestedfruitchange'));
-    }
+    window.dispatchEvent(new Event(`${property.toLocaleLowerCase()}change`));
 
     return true;
   },

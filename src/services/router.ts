@@ -41,13 +41,15 @@ const Router: Router = {
     }
 
     if (Router.pageElement) {
-      if (Router.main.children[0]) {
-        Router.main.children[0].remove();
-      }
+      document.startViewTransition(() => {
+        if (Router.main?.children[0]) {
+          Router.main.children[0].remove();
+        }
 
-      Router.main.appendChild(Router.pageElement);
-      window.scrollX = 0;
-      window.scrollY = 0;
+        Router.main?.appendChild(Router.pageElement!);
+        window.scrollX = 0;
+        window.scrollY = 0;
+      });
     }
   },
 };

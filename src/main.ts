@@ -1,5 +1,6 @@
 import '@/styles/normalize.css';
 import '@/styles/style.css';
+import '@/styles/transition.css';
 
 import { initStore } from '@/services/store';
 import Router from '@/services/router';

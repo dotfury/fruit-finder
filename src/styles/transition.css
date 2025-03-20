@@ -1,0 +1,13 @@
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.5s;
+}
+
+main {
+  view-transition-name: main-transition;
+}
+
+::view-transition-old(main-transition),
+::view-transition-new(main-transition) {
+  opacity: 1;
+}
