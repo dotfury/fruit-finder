@@ -30,7 +30,7 @@ const Router: Router = {
         Router.pageElement = document.createElement('featured-fruit');
         break;
       default:
-        if (to.startsWith(`${BASE_URL}/detail-`)) {
+        if (to.startsWith(`${BASE_URL}detail-`)) {
           Router.pageElement = document.createElement('fruit-detail');
           const fruit = to.substring(to.lastIndexOf('-') + 1);
           Router.pageElement.dataset.fruitId = fruit;

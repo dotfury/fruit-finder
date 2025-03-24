@@ -56,6 +56,6 @@ export default class FeaturedFruit extends HTMLElement {
   }
 
   goToDetails(): void {
-    Router.navigate(`${BASE_URL}/detail-${this.freaturedFruit}`);
+    Router.navigate(`${BASE_URL}detail-${this.freaturedFruit}`);
   }
 }

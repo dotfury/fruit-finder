@@ -40,6 +40,6 @@ export default class RecomendedFruit extends HTMLElement {
   }
 
   goToDetails(): void {
-    Router.navigate(`${BASE_URL}/detail-${this.fruit}`);
+    Router.navigate(`${BASE_URL}detail-${this.fruit}`);
   }
 }
