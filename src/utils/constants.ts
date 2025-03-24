@@ -1,1 +1,1 @@
-export const BASE_URL = '/fruit-finder';
+export const BASE_URL = '/fruit-finder/';
